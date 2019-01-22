@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--引入的外部CSS样式文件-->
+    <link rel="stylesheet" type="text/css" href="style.css" /> 
+    <!--引入的外部JS脚本文件-->
+    <script type="text/javascript" src="script.js"></script> 
+</head>
+<body>
+    <div id="nav" class="nav"> 
+     <ul> 
+      <li><a href="#">网站首页</a></li> 
+      <li onmouseover="showsub(this)" onmouseout="hidesub(this)"><a href="#">课程大厅</a> 
+      <ul> 
+       <li><a href="#">JavaScript</a></li> 
+       <li><a href="#">jQuery</a></li> 
+       <li><a href="#">Ajax</a></li> 
+      </ul> 
+      </li> 
+      <li onmouseover="showsub(this)" onmouseout="hidesub(this)"><a href="#">学习中心</a> 
+      <ul> 
+       <li><a href="#">视频学习</a></li> 
+       <li><a href="#">案例学习</a></li> 
+       <li><a href="#">交流平台</a></li> 
+      </ul> 
+      </li> 
+      <li><a href="#">经典案例</a></li> 
+      <li><a href="#">关于我们</a></li> 
+     </ul> 
+    </div> 
+</body>
+</html>

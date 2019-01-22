@@ -1,0 +1,45 @@
+<span style="font-size:18px;">/*CSS全局设置*/
+*{ 
+ margin:0; 
+ padding:0; 
+} 
+.nav{ 
+ background-color:#EEEEEE; 
+ height:40px; 
+ width:450px; 
+ margin:0 auto; 
+} 
+ul{ 
+ list-style:none; 
+} 
+ul li{ 
+ float:left; 
+ line-height:40px; 
+ text-align:center; 
+} 
+a{ 
+ text-decoration:none; 
+ color:#000000; 
+ display:block; 
+ width:90px; 
+ height:40px; 
+} 
+a:hover{ 
+ background-color:#666666; 
+ color:#FFFFFF; 
+} 
+ul li ul li{ 
+ float:none; 
+ background-color:#EEEEEE; 
+} 
+ul li ul{ 
+ display:none; 
+} 
+/*为了兼容IE7设置的CSS样式，但是又必须写在a:hover前面*/
+ul li ul li a:link,ul li ul li a:visited{ 
+ background-color:#EEEEEE; 
+} 
+ul li ul li a:hover{ 
+ background-color:#009933; 
+} 
+</span>

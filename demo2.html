@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>树状列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<style>
+*{margin:0px;padding:0px;}
+A:link{color: #000000; TEXT-DECORATION: none;}
+A:visited {COLOR: #000000; TEXT-DECORATION: none}
+A:active {COLOR: #3333ff; TEXT-DECORATION: none}
+A:hover {COLOR: #ff0000; TEXT-DECORATION: none}
+.panel{ BACKGROUND: #DDE4EA; COLOR:#654125;}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+img{
+  border:0px;
+  width:16px;
+  height:16px;
+}
+#menu{
+  margin-top: 0px;
+}
+.U1 {
+  background: #FFFFFF;
+  border-bottom:1px #9D9D9D solid;
+}
+.L1 a:link, .L1 a:visited{
+  color: #476074;
+  background: url("");
+  font-size:9pt;
+  display: block;
+  text-decoration: none;
+  height: 24px;
+}
+.L1 a:link span, .L1 a:visited span{
+ background: url("") no-repeat left;
+ padding-left: 15px;
+ height:24px;
+ vertical-align:middle;
+ padding:7px 0px 0px 16px;
+ cursor:pointer;
+ width:100%;
+}
+.L1 a:hover{
+  color: #000000;
+  font-weight:bold;
+  background: url("");
+  background-position: 0 -24px;
+}
+/* 一级菜单 active 效果 */
+.L1 a:link.active, .L1 a:hover.active, .L1 a:active.active, .L1 a:visited.active{
+  background: url("");
+  background-position: 0 -24px;
+}
+.L1 a:link.active span, .L1 a:hover.active span, .L1 a:active.active span, .L1 a:visited.active span{
+  color: #000000;
+  font-weight:bold;
+  background: url("") no-repeat left;
+}
+.L21 a:link, .L21 a:visited, .L22 a:link, .L22 a:visited, .L3 a:link, .L3 a:visited{
+  color: #444659;
+  background: none;
+  height: 24px;
+  font-size:9pt;
+  display: block;
+  text-decoration: none;
+  padding-left: 13px;
+  background: none;
+}
+.L21 a:link span, .L21 a:visited span, .L22 a:link span, .L22 a:visited span, .L3 a:link span, .L3 a:visited span{
+ vertical-align:middle;
+ padding:7px 0px 0px 16px;
+ background: url("") no-repeat left center;
+ cursor:pointer;
+ width:100%;
+}
+.L22 a:link span, .L22 a:visited span, .L3 a:link span, .L3 a:visited span{
+ background:none;
+}
+.L21 a:hover, .L22 a:hover, .L3 a:hover{
+  background: url("") no-repeat top left;
+  font-weight:bold;
+}
+.L3 a:link span, .L3 a:visited span{
+  padding:7px 0px 0px 26px;
+}
+.L4 a:link span, .L4 a:visited span{
+  padding:7px 0px 0px 36px;
+}
+/* 二级菜单 active 效果 */
+.L21 a:link.active, .L21 a:hover.active, .L21 a:active.active, .L21 a:visited.active{
+  background: none;
+}
+.L21 a:link.active span, .L21 a:hover.active span, .L21 a:active.active span, .L21 a:visited.active span{
+  color: #000000;
+  font-weight:bold;
+  background: url("") no-repeat left center;
+}
+/* 二、三级菜单 active */
+.L22 a:link.active, .L22 a:hover.active, .L22 a:active.active, .L22 a:visited.active,
+.L3 a:link.active, .L3 a:hover.active, .L3 a:active.active, .L3 a:visited.active{
+  background: url("") no-repeat left;
+  background-position: 0 -24px;
+}
+.L22 a:link.active span, .L22 a:hover.active span, .L22 a:active.active span, .L22 a:visited.active span,
+.L3 a:link.active span, .L3 a:hover.active span, .L3 a:active.active span, .L3 a:visited.active span{
+  color: #FFFFFF;
+  font-weight:bold;
+  background: none;
+}
+.Ls{
+  text-align:right;
+  padding-top:4px;
+  height:20px;
+  font-size:9pt;
+}
+.setting:link, .setting:visited{
+  text-decoration: underline;
+  display:block;
+}
+</style>
+</head>
+<body class="panel" onLoad="init();">
+<div id="sub_tabs" class="sub_tabs"></div>
+ <div id="body">
+ <!-- OA树开始-->
+<ul id="menu"> 
+<!--路政报表菜单 -->
+<li class="L1"><a href="javascript:c('m01');" id="m01"><span><img src="" align="absMiddle"/> 路政报表</span></a></li>
+<ul id="m01d" style="display:none;" class="U1">
+<li class="L21"><a href="javascript:c('f40');" id="f40"><span><img src="" align="absMiddle"/> 路政报表1</span></a></li>
+ <ul id="f40d" style="display:none;">
+ <li class="L3"><a href="javascript:c('f42');"><span><img src= align="absMiddle"/> 报表内容</span></a></li>
+  <ul id="f42d" style="display:none;"><li class="L4" ><a href="#"><span><img src= align="absMiddle"/>子报表内容</span></a></li></ul>
+ <li class="L3"><a href="#"><span><img src="" align="absMiddle"/> 报表内容</span></a></li>
+ </ul>
+<li class="L21"><a href="javascript:c('f41');" id="f41"><span><img src="" align="absMiddle"/> 路政报表2</span></a></li>
+ <ul id="f41d" style="display:none;">
+ <li class="L3"><a href="#"><span><img src="" align="absMiddle"/>报表内容</span></a></li>
+ <li class="L3"><a href="#"><span><img src="" align="absMiddle"/>报表内容</span></a></li> 
+ </ul>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+</ul>
+<!--路政报表菜单 结束 -->
+<!--路政报表菜单 -->
+<li class="L1"><a href="javascript:c('m03');" id="m03"><span><img src="" align="absMiddle"/> 路政报表</span></a></li>
+<ul id="m03d" style="display:none;" class="U1">
+<li class="L21"><a href="javascript:c('f42');" id="f42"><span><img src= align="absMiddle"/> 路政报表1</span></a></li>
+ <ul id="f42d" style="display:none;">
+ <li class="L3"><a href="#"><span><img src="" align="absMiddle"/> 报表内容</span></a></li>
+ <li class="L3"><a href="#"><span><img src="" align="absMiddle"/> 报表内容</span></a></li>
+ </ul>
+<li class="L21"><a href="javascript:c('f43');" id="f43"><span><img src= align="absMiddle"/> 路政报表2</span></a></li>
+ <ul id="f43d" style="display:none;">
+ <li class="L3"><a href="#"><span><img src= align="absMiddle"/>报表内容</span></a></li>
+ <li class="L3"><a href="#"><span><img src= align="absMiddle"/>报表内容</span></a></li> 
+ </ul>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+<li class="L22"><a href="#"><span><img src="" /> 报表内容</span></a></li>
+</ul>
+<!--路政报表菜单 结束 -->
+</ul>
+</ul>
+</div>
+<script language="JavaScript">
+window.onresize=function()
+{
+  if(!parent.$('frame1')) return;
+  var rows = parent.$('frame1').rows.split(",");
+  if(rows.length < 2 || rows[1]!="*") return;
+  $("bottom_center").style.width = "0px";
+  if(document.body.clientHeight > $("sub_tabs").clientHeight+$("bottom").clientHeight)
+   $("body").style.height=(document.body.clientHeight-$("sub_tabs").clientHeight-$("bottom").clientHeight)+"px";
+  var widthTotal = parseInt($("bottom").clientWidth);
+  var widthLeft = parseInt($("bottom_left").clientWidth);
+  var widthRight = parseInt($("bottom_right").clientWidth);
+  if(!isNaN(widthTotal) && !isNaN(widthLeft) && !isNaN(widthRight))
+  {
+   $("bottom_center").style.width = widthTotal - widthLeft - widthRight + "px";
+  }
+};
+function init()
+{
+  window.onresize();
+}
+var sub_menu="1";
+function view_menu(id)
+{
+  set_current("");
+  if($("menu").innerHTML.toLowerCase().indexOf("<li") >= 0)
+   $("menu_code_"+sub_menu).innerText=$("menu").innerHTML;
+  if($("menu_code_"+id).innerText=="" || isUndefined($("menu_code_"+id).innerText))
+  {
+   $("menu").innerHTML="<img src='/images/loading.gif' align='absMiddle'> 加载中，请稍候……";
+   if(id==2) args="MENU_TYPE=SHORTCUT&OA_SUB_WINDOW=0&MENU_DISPLAY=";
+   else if(id==3) args="MENU_TYPE=OA&OA_SUB_WINDOW=0";
+   else if(id==4) args="MENU_TYPE=FAV&OA_SUB_WINDOW=0";
+   else if(id==5) args="MENU_TYPE=FIS&OA_SUB_WINDOW=0";
+   else args="OA_SUB_WINDOW=0";
+   _get("menu_code.php", args, update_menu, true);
+  }
+  else
+  {
+   $("menu").innerHTML=$("menu_code_"+id).innerText;
+  }
+  if($('link_'+sub_menu))
+   $('link_'+sub_menu).className="";
+  $('link_'+id).className="active";
+  sub_menu=id;
+  setCookie("MENU_UI_1", id);
+  if(id == 5)
+  {
+   openURL("http://www.jb51.net/");
+  }
+}
+function update_menu(req)
+{
+  if(req.status == 200)
+  {
+   if(req.responseText=="")
+     $("menu").innerHTML="<div style='padding:10px;'>无可访问菜单</div>";
+   else
+   {
+     $("menu").innerHTML=req.responseText;
+     if(sub_menu == 2) c('mMENU_SHORTCUT');
+   }
+  }
+  else
+  {
+   $("menu").innerHTML="<div style='padding:10px;'>错误："+req.status+"</div>";
+  }
+}
+var cur_id="",cur_expand="";
+var flag=0,sflag=0;
+//-------- 菜单点击事件 -------
+function c(id)
+{
+ var targetid,targetelement;
+ var strbuf;
+ var el=$(id);
+ if(!el)
+   return;
+ //-------- 如果点击了展开或收缩按钮---------
+ targetid=el.id+"d";
+ targetelement=$(targetid);
+ var expandUL=$(cur_expand+"d");
+ var expandLink=$(cur_expand);
+ if (targetelement.style.display=="none")
+ {
+   if(expandUL && expandLink && el.id.substr(0,1)=="m")
+   {
+    expandLink.className="";
+    expandUL.style.display='none';
+   }
+   if(el.id.substr(0,1)=="m")
+    cur_expand=el.id;
+   el.className="active";
+   targetelement.style.display='';
+   menu_flag=0;
+   //$("expand_link").src="images/green_minus.gif";
+ }
+ else
+ {
+   el.className="";
+   targetelement.style.display="none";
+   menu_flag=1;
+   //$("expand_link").src="images/green_plus.gif";
+   var links=document.getElementsByTagName("A");
+   for (i=0; i<links.length; i++)
+   {
+    el=links[i];
+    if(el.parentNode.className.toUpperCase()=="L1" && el.className=="active" && el.id.substr(0,1)=="m")
+    {
+     menu_flag=0;
+     // $("expand_link").src="images/green_minus.gif";
+     break;
+    }
+   }
+ }
+}
+//-------- 打开网址 -------
+var $ = function(id) {return document.getElementById(id);};
+var userAgent = navigator.userAgent.toLowerCase();
+var is_opera = userAgent.indexOf('opera') != -1 && opera.version();
+var is_ie = (userAgent.indexOf('msie') != -1 && !is_opera) && userAgent.substr(userAgent.indexOf('msie') + 5, 3);
+function MouseOverBtn(){event.srcElement.className+="Hover";}
+function MouseOutBtn() {event.srcElement.className=event.srcElement.className.substr(0,event.srcElement.className.indexOf("Hover"));}
+function CorrectButton()
+{
+  var inputs=document.getElementsByTagName("INPUT");
+  for(var i=0; i<inputs.length; i++)
+  {
+   var el = inputs[i];
+   var elType = el.type.toLowerCase();
+   var elClass = el.className.toLowerCase();
+   var elLength = Math.ceil(el.value.replace(/[^\x00-\xff]/g,"**").length/2);
+   if(elType!="button" && elType!="submit" && elType!="reset" || elClass!="bigbutton"&&elClass!="smallbutton")
+     continue;
+   if(elLength<=3)
+     el.className+="A";
+   else if(elLength==4)
+     el.className+="B";
+   else if(elLength>=5 && elLength<=7)
+     el.className+="C";
+   else if(elLength>=8 && elLength<=11)
+     el.className+="D";
+   else
+     el.className+="E";
+   if(is_ie)
+   {
+     el.attachEvent("onmouseover", MouseOverBtn);
+     el.attachEvent("onmouseout", MouseOutBtn);
+   }
+  }
+}
+if(is_ie)
+  window.attachEvent("onload", CorrectButton);
+else
+  window.addEventListener("load", CorrectButton,false);
+</script>
+ </body>
+</html>
